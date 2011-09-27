@@ -1,0 +1,42 @@
+License: Public Domain
+
+A simple UDP echo server which can be used for some NAT traversal routines (UDP
+hole punching). There is although a simple demonstration client.
+
+Building:
+---------
+Just enter make in the client or server directory.
+
+Tested on Linux only.
+
+Running:
+--------
+start echoserver [Port] or echoclient [IP] [Port] to start the server or the client.
+
+
+Protocol:
+---------
+The client sends a UDP datagram consisting of 
+
+condata $SomeKey
+
+to the server.
+
+The server replies each request with
+
+condataReply $SomeKey $IPAddress $Port
+
+The $IPAdress is in regular 4 Byte Notation: 1.2.3.4
+
+The $SomeKey isn't a security feature but can be used to distinguish between 
+different ports during a Hole Punching Procedure.
+
+Example:
+--------
+Client to Server --> condata 0x12345678
+Server to Client <-- condataReply 0x12345678 127.0.0.1 6843
+
+Warranty & Security
+-------------------
+Plaintext UDP is not secure at all. There is no warranty for anything.
+
